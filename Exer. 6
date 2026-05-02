@@ -1,0 +1,22 @@
+clc
+clear
+c=0.1
+x0=5
+t0=0.01
+tmax=1
+nx=10
+nt=2000
+dx=x0/(nx-1)
+dt=0.004
+x=linspace(-x0,x0,nx)
+t=linspace(0,tmax,nt)
+U=zeros(nx,nt)
+U(:,1)=sin((2*%pi*x0))^6
+for j=2:nt
+    for n=2:nx-1
+        U(n+1,j)=U(n-1,j)-c*(U(n,j)-U(n,j-1))
+    end
+end
+xgrid
+xset("thickness",3)
+plot(x,U(:,1),"-",x,U(:,100))
